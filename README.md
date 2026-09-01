@@ -53,6 +53,13 @@ Atalhos internos como `actor-first-class` e `actor-race` são preservados porque
 
 ## Histórico
 
+### v0.1.7
+
+- Padroniza visualmente todos os botões de categoria.
+- Remove as contagens laterais das categorias, que antes apareciam somente depois que cada categoria havia sido carregada.
+- Evita que o painel mude de aparência conforme o usuário visita Itens, Magias, Talentos e outras categorias.
+- A quantidade de resultados continua disponível no contador principal do browser.
+
 ### v0.1.6
 
 - Todos os grupos de filtros agora começam **fechados** ao abrir o Compendium Browser.
