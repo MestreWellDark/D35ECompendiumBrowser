@@ -1,0 +1,48 @@
+{
+  "id": "d35e-compendium-browser",
+  "title": "D35E Advanced Compendium Browser",
+  "description": "Navegador de compêndios por categorias e filtros para D&D 3.5e (D35E). v0.1.4 corrige o foco da pesquisa durante a filtragem e permite abrir documentos clicando em qualquer ponto do cartão de resultado.",
+  "version": "0.1.4",
+  "authors": [
+    {
+      "name": "Mestre Well / ChatGPT"
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "D35E",
+        "type": "system",
+        "compatibility": {
+          "minimum": "3.1.0",
+          "verified": "3.1.0"
+        }
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/browser.js"
+  ],
+  "styles": [
+    "styles/browser.css"
+  ],
+  "languages": [
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "url": "https://github.com/MestreWellDark/D35ECompendiumBrowser",
+  "manifest": "https://raw.githubusercontent.com/MestreWellDark/D35ECompendiumBrowser/main/module.json",
+  "download": "https://raw.githubusercontent.com/MestreWellDark/D35ECompendiumBrowser/main/d35e-compendium-browser-v0.1.4.zip"
+}
