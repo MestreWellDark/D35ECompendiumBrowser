@@ -7,6 +7,8 @@ Navegador avançado de compêndios para **Foundry VTT v13** usando o sistema **D
 - Categorias: **Itens, Magias, Talentos, Habilidades, Classes, Raças, Aprimoramentos, Buffs/Auras e Bestiário**.
 - Pesquisa por texto com atualização dinâmica sem perda de foco.
 - Filtros específicos para cada categoria.
+- Todos os grupos de filtros começam fechados ao abrir o browser e ao trocar de categoria.
+- O estado aberto/fechado dos filtros é preservado durante filtragens e re-renders dentro da mesma categoria.
 - Filtro por compêndio e por origem (sistema, módulo ou mundo).
 - Descoberta automática de novos compêndios instalados; não depende de uma lista fixa de packs.
 - Paginação para trabalhar com milhares de entradas sem renderizar tudo de uma vez.
@@ -50,6 +52,14 @@ Atalhos internos como `actor-first-class` e `actor-race` são preservados porque
 - Sistema D35E: **3.1.0**
 
 ## Histórico
+
+### v0.1.6
+
+- Todos os grupos de filtros agora começam **fechados** ao abrir o Compendium Browser.
+- Ao trocar de categoria (Itens, Magias, Talentos, Classes etc.), todos os filtros da nova categoria começam fechados.
+- Durante a filtragem dentro da mesma categoria, o módulo continua preservando exatamente os grupos que o usuário abriu ou fechou.
+- Grupos que aparecem somente depois do carregamento também começam fechados.
+- A rolagem dos filtros é reiniciada no topo ao abrir o browser ou trocar de categoria, mas continua preservada durante os re-renders da mesma categoria.
 
 ### v0.1.5
 
