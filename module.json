@@ -1,8 +1,8 @@
 {
   "id": "d35e-compendium-browser",
   "title": "D35E Advanced Compendium Browser",
-  "description": "Navegador de compêndios por categorias e filtros para D&D 3.5e (D35E). v0.1.7 padroniza os botões de categoria removendo contagens que apareciam apenas depois de cada categoria ser carregada.",
-  "version": "0.1.7",
+  "description": "Navegador de compêndios por categorias e filtros para D&D 3.5e (D35E). v0.1.8 preserva a posição da rolagem dentro de cada lista de filtro ao marcar ou desmarcar opções.",
+  "version": "0.1.8",
   "authors": [
     {
       "name": "Mestre Well / ChatGPT"
