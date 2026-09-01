@@ -25,8 +25,8 @@ https://raw.githubusercontent.com/MestreWellDark/D35ECompendiumBrowser/main/modu
 
 ## Instalação manual
 
-1. Baixe `d35e-compendium-browser-v0.1.4.zip`.
-2. Extraia a pasta `d35e-compendium-browser` em `FoundryVTT/Data/modules/`.
+1. Baixe o ZIP do repositório pelo botão **Code > Download ZIP**.
+2. Extraia o conteúdo para uma pasta chamada `d35e-compendium-browser` em `FoundryVTT/Data/modules/`.
 3. Reinicie o Foundry.
 4. No mundo D35E, ative **D35E Advanced Compendium Browser** em **Manage Modules**.
 5. Abra a aba **Compêndios** e use **Compendium Browser +**.
