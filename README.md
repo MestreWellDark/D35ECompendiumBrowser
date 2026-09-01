@@ -51,6 +51,14 @@ Atalhos internos como `actor-first-class` e `actor-race` são preservados porque
 
 ## Histórico
 
+### v0.1.5
+
+- Preserva quais grupos de filtros o usuário deixou abertos ou fechados durante os re-renders.
+- Um filtro fechado manualmente não volta a abrir só porque uma opção foi selecionada.
+- Um grupo aberto manualmente continua aberto ao selecionar/remover opções.
+- O estado é mantido separadamente por categoria (Itens, Magias, Talentos etc.).
+- Preserva também a posição vertical da barra de filtros para evitar saltos ao topo.
+
 ### v0.1.4
 
 - Corrige a pesquisa que perdia o foco após cada atualização.
