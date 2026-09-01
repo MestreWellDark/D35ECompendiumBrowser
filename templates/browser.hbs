@@ -1,0 +1,79 @@
+<div class="d35e-acb-shell">
+  <div class="d35e-acb-toolbar">
+    <label class="d35e-acb-search">
+      <i class="fas fa-search"></i>
+      <input type="search" name="search" value="{{search}}" placeholder="{{localize 'D35EACB.Search'}}" autocomplete="off" />
+    </label>
+    <div class="d35e-acb-result-count">{{#unless loading}}{{total}} {{localize "D35EACB.Results"}}{{/unless}}</div>
+    <button type="button" class="d35e-acb-clear"><i class="fas fa-filter-circle-xmark"></i> {{localize "D35EACB.Clear"}}</button>
+    <button type="button" class="d35e-acb-reload"><i class="fas fa-rotate"></i> {{localize "D35EACB.Reload"}}</button>
+  </div>
+
+  <div class="d35e-acb-main">
+    <aside class="d35e-acb-sidebar">
+      <nav class="d35e-acb-categories" aria-label="{{localize 'D35EACB.Categories'}}">
+        <div class="d35e-acb-sidebar-title"><i class="fas fa-layer-group"></i> {{localize "D35EACB.Categories"}}</div>
+        {{#each categories}}
+          <button type="button" class="d35e-acb-tab {{#if active}}active{{/if}}" data-category="{{id}}" title="{{label}}">
+            <i class="{{icon}}"></i><span>{{label}}</span>{{#if countKnown}}<em>{{count}}</em>{{/if}}
+          </button>
+        {{/each}}
+      </nav>
+
+      <div class="d35e-acb-filter-title"><i class="fas fa-sliders"></i> {{localize "D35EACB.Filters"}}</div>
+      <div class="d35e-acb-filters">
+        {{#unless loading}}
+          {{#each filters}}
+            <details class="d35e-acb-filter-group" {{#if open}}open{{/if}}>
+              <summary>{{label}} <span>{{options.length}}</span></summary>
+              <div class="d35e-acb-filter-options">
+                {{#each options}}
+                  <label class="d35e-acb-filter-option" title="{{label}}">
+                    <input type="checkbox" data-filter-key="{{../key}}" value="{{value}}" {{#if checked}}checked{{/if}} />
+                    <span>{{label}}</span><em>{{count}}</em>
+                  </label>
+                {{/each}}
+              </div>
+            </details>
+          {{/each}}
+        {{/unless}}
+      </div>
+    </aside>
+
+    <section class="d35e-acb-results">
+      {{#if loading}}
+        <div class="d35e-acb-loading">
+          <i class="fas fa-spinner fa-spin"></i>
+          <strong>{{localize "D35EACB.Loading"}}</strong>
+          <span>{{localize "D35EACB.AllSources"}}</span>
+        </div>
+      {{else}}
+        {{#if hasResults}}
+          <ol class="d35e-acb-list">
+            {{#each results}}
+              <li class="d35e-acb-entry" draggable="true" tabindex="0" role="button" data-uuid="{{uuid}}" data-document-name="{{documentName}}">
+                <img src="{{img}}" alt="" loading="lazy" />
+                <div class="d35e-acb-entry-body">
+                  <a class="d35e-acb-entry-name" data-uuid="{{uuid}}">{{name}}</a>
+                  <div class="d35e-acb-entry-summary">{{summary}}</div>
+                  <div class="d35e-acb-entry-source"><i class="fas fa-book"></i> {{packLabel}} <small>{{packageLabel}}</small></div>
+                </div>
+                <i class="fas fa-grip-vertical d35e-acb-drag-handle" title="Drag & drop"></i>
+              </li>
+            {{/each}}
+          </ol>
+        {{else}}
+          <div class="d35e-acb-empty"><i class="fas fa-magnifying-glass"></i>{{localize "D35EACB.NoResults"}}</div>
+        {{/if}}
+
+        {{#if showPagination}}
+          <footer class="d35e-acb-pagination">
+            <button type="button" class="d35e-acb-page-prev" {{#unless canPrevious}}disabled{{/unless}}><i class="fas fa-chevron-left"></i> {{localize "D35EACB.Previous"}}</button>
+            <span>{{localize "D35EACB.Page"}} <strong>{{page}}</strong> {{localize "D35EACB.Of"}} <strong>{{pages}}</strong></span>
+            <button type="button" class="d35e-acb-page-next" {{#unless canNext}}disabled{{/unless}}>{{localize "D35EACB.Next"}} <i class="fas fa-chevron-right"></i></button>
+          </footer>
+        {{/if}}
+      {{/if}}
+    </section>
+  </div>
+</div>
