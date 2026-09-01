@@ -9,6 +9,7 @@ Navegador avançado de compêndios para **Foundry VTT v13** usando o sistema **D
 - Filtros específicos para cada categoria.
 - Todos os grupos de filtros começam fechados ao abrir o browser e ao trocar de categoria.
 - O estado aberto/fechado dos filtros é preservado durante filtragens e re-renders dentro da mesma categoria.
+- A rolagem da coluna de filtros e a rolagem interna de cada lista de opções são preservadas ao marcar/desmarcar filtros.
 - Filtro por compêndio e por origem (sistema, módulo ou mundo).
 - Descoberta automática de novos compêndios instalados; não depende de uma lista fixa de packs.
 - Paginação para trabalhar com milhares de entradas sem renderizar tudo de uma vez.
@@ -52,6 +53,13 @@ Atalhos internos como `actor-first-class` e `actor-race` são preservados porque
 - Sistema D35E: **3.1.0**
 
 ## Histórico
+
+### v0.1.8
+
+- Corrige a rolagem interna de filtros longos.
+- Ao rolar dentro de uma lista de opções e marcar/desmarcar uma caixa, a lista volta exatamente à mesma posição depois da atualização dos resultados.
+- A posição é armazenada separadamente para cada grupo de filtro e para cada categoria.
+- O estado é capturado antes do re-render do Foundry, evitando o salto para o topo ao selecionar uma opção.
 
 ### v0.1.7
 
