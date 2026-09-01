@@ -1,8 +1,8 @@
 {
   "id": "d35e-compendium-browser",
   "title": "D35E Advanced Compendium Browser",
-  "description": "Navegador de compêndios por categorias e filtros para D&D 3.5e (D35E). v0.1.4 corrige o foco da pesquisa durante a filtragem e permite abrir documentos clicando em qualquer ponto do cartão de resultado.",
-  "version": "0.1.4",
+  "description": "Navegador de compêndios por categorias e filtros para D&D 3.5e (D35E). v0.1.5 preserva os grupos de filtros abertos/fechados e a posição da barra lateral durante as atualizações.",
+  "version": "0.1.5",
   "authors": [
     {
       "name": "Mestre Well / ChatGPT"
@@ -25,7 +25,8 @@
     ]
   },
   "esmodules": [
-    "scripts/browser.js"
+    "scripts/browser.js",
+    "scripts/filter-state.js"
   ],
   "styles": [
     "styles/browser.css"
