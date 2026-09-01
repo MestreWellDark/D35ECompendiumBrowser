@@ -2,14 +2,16 @@ const MODULE_ID = "d35e-compendium-browser";
 
 // Foundry's legacy Application renderer replaces the browser template whenever
 // a search/filter/page change occurs. Native <details> elements therefore lose
-// their user-controlled open/closed state and fall back to the template's
-// defaults. Keep that purely visual state outside the rendered template.
+// their user-controlled open/closed state and scroll positions unless we keep
+// that visual state outside the rendered template.
 //
-// UX rule for v0.1.6:
+// UX rules:
 // - every filter group starts CLOSED whenever the browser is opened;
 // - every filter group starts CLOSED whenever the user changes category;
 // - while staying in the same category, the user's open/closed choices survive
-//   result re-renders caused by search, checkbox filters and pagination.
+//   result re-renders caused by search, checkbox filters and pagination;
+// - both the main filter column scroll and the scroll inside each individual
+//   filter group survive checkbox-triggered re-renders.
 const filterUiState = new Map();
 const initializedShells = new WeakSet();
 let observer;
@@ -20,9 +22,15 @@ let activeCategory = null;
 function stateFor(category) {
   let state = filterUiState.get(category);
   if (!state) {
-    state = { groups: new Map(), scrollTop: 0 };
+    state = {
+      groups: new Map(),
+      scrollTop: 0,
+      optionScrolls: new Map()
+    };
     filterUiState.set(category, state);
   }
+  state.groups ??= new Map();
+  state.optionScrolls ??= new Map();
   return state;
 }
 
@@ -39,8 +47,24 @@ function filterKey(details) {
 function resetVisualState(category) {
   const state = stateFor(category);
   state.groups.clear();
+  state.optionScrolls.clear();
   state.scrollTop = 0;
   return state;
+}
+
+function rememberCurrentScrollPositions(shell) {
+  if (!(shell instanceof HTMLElement)) return;
+  const category = currentCategory(shell);
+  const state = stateFor(category);
+  const panel = shell.querySelector(".d35e-acb-filters");
+  if (panel) state.scrollTop = panel.scrollTop;
+
+  shell.querySelectorAll(".d35e-acb-filter-group").forEach(details => {
+    const key = filterKey(details);
+    const options = details.querySelector(".d35e-acb-filter-options");
+    if (!key || !options) return;
+    state.optionScrolls.set(key, options.scrollTop);
+  });
 }
 
 function installOnShell(shell, { reset = false } = {}) {
@@ -50,6 +74,15 @@ function installOnShell(shell, { reset = false } = {}) {
   const category = currentCategory(shell);
   const state = reset ? resetVisualState(category) : stateFor(category);
   const panel = shell.querySelector(".d35e-acb-filters");
+
+  // Capture scroll positions before the browser's checkbox listener triggers a
+  // render. Capture phase is intentional: browser.js handles checkbox changes
+  // on the input itself, so this runs first and records the exact viewport the
+  // user was looking at.
+  shell.addEventListener("change", event => {
+    if (!event.target?.matches?.('.d35e-acb-filter-option input[type="checkbox"]')) return;
+    rememberCurrentScrollPositions(shell);
+  }, true);
 
   // Restore remembered group state before attaching toggle listeners so our
   // own restoration cannot be mistaken for a new user preference. A group
@@ -72,6 +105,18 @@ function installOnShell(shell, { reset = false } = {}) {
       if (!currentKey) return;
       stateFor(currentCategory(shell)).groups.set(currentKey, current.open);
     });
+
+    const options = details.querySelector(".d35e-acb-filter-options");
+    if (options) {
+      requestAnimationFrame(() => {
+        if (!options.isConnected) return;
+        options.scrollTop = reset ? 0 : (state.optionScrolls.get(key) ?? 0);
+      });
+
+      options.addEventListener("scroll", () => {
+        stateFor(currentCategory(shell)).optionScrolls.set(key, options.scrollTop);
+      }, { passive: true });
+    }
   });
 
   if (panel) {
